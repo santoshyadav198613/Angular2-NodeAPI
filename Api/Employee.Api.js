@@ -1,19 +1,25 @@
 var employeeApi = function (app) {
-    var emplList = [{ id: 1, name: 'Test1', age: 34, address: 'pune' },
-    { id: 2, name: 'Test2', age: 35, address: 'pune' },
-    { id: 3, name: 'Test3', age: 36, address: 'pune' }];
+    var empList = [{ id: 1, name: 'Vikram', age: 34, address: 'Pune' },
+    { id: 2, name: 'Kiran', age: 34, address: 'Pne' },
+    { id: 3, name: 'Nilesh', age: 34, address: 'Pne' }];
+
 
     app.get('/api/employee', (req, res) => {
-        res.send(emplList);
+        //console.log('This is get Employee api');
+        res.send(empList);
     });
+
+
     app.post('/api/employee', (req, res) => {
-        emplList.push(
-            { id: 4, name: 'Test4', age: 37, address: 'pune' }
+
+        empList.push(
+            { id: 4, name: 'Sachin', age: 25, address: 'Pune' }
         );
-        res.send(emplList);
-        console.log('This is post api for employee');
+        res.send(empList);
+        console.log('This is post Employee api');
     });
 
 };
+
 
 module.exports = employeeApi;
