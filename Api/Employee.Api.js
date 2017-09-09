@@ -11,9 +11,9 @@ var employeeApi = function (app) {
 
 
     app.post('/api/employee', (req, res) => {
-
+        var employee = req.body;
         empList.push(
-            { id: 4, name: 'Sachin', age: 25, address: 'Pune' }
+            { id: 4, name: employee.name, age: employee.age, address: employee.address }
         );
         res.send(empList);
         console.log('This is post Employee api');
