@@ -4,6 +4,10 @@ var express = require('express');
 var app = express();
 var server = http.createServer();
 var fs = require('fs');
+
+var MongoClient= require('mongodb').MongoClient;
+var ObjectID = require('mongodb').ObjectID;
+
 var bodyParser = require('body-parser');
 var logger = require('./middleware/logger');
 var employeeApi = require('./api/Employee.Api');
@@ -24,6 +28,14 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json 
 app.use(bodyParser.json())
+
+var url = 'mongodb://localhost:27017/shopingapp';
+MongoClient.connect(url, function (err, db) {
+    employeeApi(app,db,ObjectID);
+    productApi(app,db,ObjectID);
+    customerApi(app,db,ObjectID);
+    orderApi(app,db,ObjectID);    
+})
 
 app.get('/User', (req, res) => {
 
@@ -46,10 +58,7 @@ app.post('/User', (req, res) => {
 });
 
 
-employeeApi(app);
-productApi(app);
-customerApi(app);
-orderApi(app);
+
 
 
 app.listen('3000', function () {
